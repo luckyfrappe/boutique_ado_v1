@@ -25,7 +25,7 @@
                 <div class="col">
                     {% if bag_items %}
                         <div class="table-responsive rounded">
-
+                            {{ bag_items|length }} item{{ bag_items|length|pluralize }} in your bag.
                         </div>
                     {% else %}
                         <p class="lead mb-5">Your shopping bag is empty.</p>
