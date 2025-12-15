@@ -1,0 +1,55 @@
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    function handleEnableDisable(input) {
+        const currentValue = parseInt(input.value, 10) || 0;
+        const minusButton = input.closest('.input-group').querySelector('.decrement-qty');
+        const plusButton = input.closest('.input-group').querySelector('.increment-qty');
+
+        minusButton.disabled = currentValue <= 1;
+        plusButton.disabled = currentValue >= 99;
+
+        if (minusButton.disabled) {
+            input.value = 1;
+        } else if (plusButton.disabled) {
+            input.value = 99;
+        }
+    }
+
+    // Initial check on page load
+    document.querySelectorAll('.qty_input').forEach(input => {
+        handleEnableDisable(input);
+    });
+
+    document.querySelectorAll('.qty_input').forEach(input => {
+        input.addEventListener('change', event => {
+            handleEnableDisable(event.target);
+        });
+    });
+
+    // Increment buttons
+    document.querySelectorAll('.increment-qty').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault();
+
+            const input = button.closest('.input-group').querySelector('.qty_input');
+            input.value = (parseInt(input.value, 10) || 0) + 1;
+
+            handleEnableDisable(input);
+        });
+    });
+
+    // Decrement buttons
+    document.querySelectorAll('.decrement-qty').forEach(button => {
+        button.addEventListener('click', e => {
+            e.preventDefault();
+
+            const input = button.closest('.input-group').querySelector('.qty_input');
+            input.value = (parseInt(input.value, 10) || 0) - 1;
+
+            handleEnableDisable(input);
+        });
+    });
+
+});
+</script>
